@@ -4,30 +4,25 @@ use PHPUnit\Framework\TestCase;
 
 class CalculadoraTest extends TestCase
 {
-    public function testSoma()
+    /**
+     * @dataProvider somaDataProvider
+     */
+    public function testSoma($n1, $n2, $esperado)
     {
         $calc = new Calculadora();
 
-        $proc = $calc->soma(1, 1);
+        $proc = $calc->soma($n1, $n2);
 
-        $this->assertEquals(2, $proc);
+        $this->assertEquals($esperado, $proc);
     }
 
-    public function testSoma2()
+    public function somaDataProvider()
     {
-        $calc = new Calculadora();
-
-        $proc = $calc->soma(-10, 5);
-
-        $this->assertEquals(-5, $proc);
-    }
-
-    public function testSoma3()
-    {
-        $calc = new Calculadora();
-
-        $proc = $calc->soma(50, 9);
-
-        $this->assertEquals(59, $proc);
+        return array(
+            array(1, 1, 2),
+            array(20, 10, 30),
+            array(-100, 30, -70),
+            array(10.5, 0.5, 11),
+        );
     }
 }
